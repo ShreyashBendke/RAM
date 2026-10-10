@@ -1,0 +1,15 @@
+D:/ModelSimProjects/ram_16x8.v {1 {vlog -work work -stats=none D:/ModelSimProjects/ram_16x8.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ram_16x8
+
+Top level modules:
+	ram_16x8
+
+} {} {}} D:/ModelSimProjects/ram_16x8_tb.v {1 {vlog -work work -stats=none D:/ModelSimProjects/ram_16x8_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ram_16x8_tb
+
+Top level modules:
+	ram_16x8_tb
+
+} {} {}}

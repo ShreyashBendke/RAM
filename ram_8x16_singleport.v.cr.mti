@@ -1,0 +1,8 @@
+D:/ModelSimProjects/ram_8x16_singleport_tb.v {1 {vlog -work work -stats=none D:/ModelSimProjects/ram_8x16_singleport_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+-- Compiling module ram_8x16_singleport_tb
+
+Top level modules:
+	ram_8x16_singleport_tb
+
+} {} {}}

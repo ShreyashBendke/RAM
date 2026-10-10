@@ -1,0 +1,88 @@
+module ram_8x16_singleport_tb();
+reg  rst,clk;
+wire [15:0]data;
+reg  [2:0]addr;
+reg  we,enable;
+reg  [15:0]tempd;
+
+integer i;
+
+ram_8x16_singleport DUT(
+         .rst(rst),
+         .clk(clk),
+         .we_in(we),
+         .re_in(enable),
+         .addr_in(addr),
+         .data(data),
+         .temp_data(tempd)
+);
+
+//Clock generation
+always #5 clk=~clk;
+
+//initialization
+task initialize;
+begin 
+   clk     = 1'b0;
+   we      = 1'b0;
+   enable  = 1'b0;
+   addr    = 3'b000;
+   data    = 16'b0;
+end
+endtask
+
+task write_op(
+    inout [15:0] data_in,
+    input       we_enb,
+    input [2:0] wr_addr
+);
+
+begin
+        @(negedge clk);
+        data = data_in;
+        we   = we_enb;
+        addr = wr_addr;
+end
+endtask
+
+    // Read Operation
+task read_op(
+        input [2:0] radd,
+        input       ren
+);
+begin
+   @(negedge clk);
+   enable   = ren;
+   addr = radd;
+end
+endtask
+   
+    
+initial
+begin
+   initialize;
+
+        // Write random data into all 8 locations
+        for(i = 0; i < 8; i = i + 1)
+        begin
+            write_op($random, 1'b1, i);
+        end
+
+        // Disable write
+        @(negedge clk);
+        we = 1'b0;
+
+        // Read all locations
+        for(i = 0; i < 8; i = i + 1)
+        begin
+            read_op(i, 1'b1);
+            @(posedge clk);
+            #1;
+            $display("Address = %0d, Data = %h", i, data);
+        end
+
+        #10;
+        $finish;
+    end
+
+endmodule 
